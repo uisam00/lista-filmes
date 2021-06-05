@@ -1,13 +1,14 @@
 <template>
-  <div class="outlined-button">
+  <div class="filled-button">
     <v-btn
       class="ma-2 configuration"
-      outlined
+      color="#3e3e55"
+      elevation="0"
       height="48"
-      color="#6C63FF"
 			width="100%"
-			@click="goTo(route)"
+      @click="goTo"
     >
+      <v-icon class="mr-1"> {{ icon }}</v-icon>
       {{ text }}
     </v-btn>
   </div>
@@ -18,22 +19,23 @@ export default {
   name: 'FilledButton',
   props: {
     text: String,
-		route: String,
+    icon: String,
   },
   methods: {
-    goTo(name) {
-      this.$router.push({ name: name })
+    goTo() {
+      this.$emit('click')
     }
   }
 }
 </script>
 
 <style lang="scss">
-.outlined-button {
+.filled-button {
   .configuration {
     text-transform: none;
     font-family: 'Roboto-Bold';
     height: 48px;
+    color: $button-text-secondary-color;
   }
 }
 </style>

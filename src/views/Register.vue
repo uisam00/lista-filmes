@@ -3,11 +3,12 @@
 		no-gutters
 		justify="center"
 		fill-height
+		class="register"
 	>
 		<v-col
 			lg="4"
 			md="12"
-			class="pr-6"
+			class="pr-4"
 		>
 
 			<v-card
@@ -15,13 +16,29 @@
 				class="pa-4"
 			>
 				<v-card-title
-					class="pa-0 mb-6 text-center"
+					class="pa-0 mb-6 card-title"
 				>
 					Criar sua conta
 				</v-card-title>
+
 				<form-register
 					@register="createFirebaseUder"
 				/>
+				<line-or />
+				<v-row justify="center mt-10 mb-10">
+          <v-col>
+						<outlined-button
+							text="Já possuo conta"
+							router="login"
+						/>
+					</v-col>
+          <v-col>
+						<filled-button
+							text="Entrar com Facebook"
+							icon="mdi-facebook"
+						/>
+					</v-col>
+        </v-row>
 			</v-card>
 
 		</v-col>
@@ -42,19 +59,48 @@
 
 <script>
 import FormRegister from '@/components/FormRegister.vue';
+import OutlinedButton from '../components/OutlinedButton.vue'
+import FilledButton from '../components/FilledButton.vue'
+import LineOr from '../components/LineOr.vue'
+
+import firebase from 'firebase';
 export default {
 	name: 'Register',
 	components: {
+		LineOr,
+    FilledButton,
+    OutlinedButton,
 		FormRegister,
 	},
 	methods: {
 		createFirebaseUder(user){
-			console.log(user);
+			firebase
+				.auth()
+				.createUserWithEmailAndPassword(user.email, user.password)
+				.then(data => {
+					data.user
+						.updateProfile({
+							displayName: user.name
+						})
+						.then(() => {
+							this.$router.push({ name: 'login' })
+						});
+				})
+				.catch(err => {
+					this.error = err.message;
+				});
 		}
 	}
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.register {
+	.card-title {
+		text-align: center;
+		display: block;
+		color: $button-color;
+		font-family: 'Roboto-bold';
+	}
+}
 </style>

@@ -19,7 +19,6 @@
 			:type="showPassword ? 'text' : 'password'"
 			name="input-10-1"
 			label="Senha"
-			hint="Mínimo 8 caracteres"
 			counter
 			@click:append="showPassword = !showPassword"
 		></v-text-field>
