@@ -1,5 +1,6 @@
 <template>
 	<v-form
+		class="login-form"
     ref="form"
     v-model="valid"
     lazy-validation
@@ -27,7 +28,7 @@
 		<v-btn
       :disabled="!valid"
       color="#6C63FF"
-      class="mr-4"
+      class="mr-4 button "
       @click="validate"
     >
       Entrar
@@ -69,6 +70,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.login-form {
+  .button {
+    color: $button-text-secondary-color;
+    text-transform: none;
+    width: 100%;
+  }
+}
 </style>

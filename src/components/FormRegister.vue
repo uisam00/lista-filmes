@@ -1,5 +1,6 @@
 <template>
 	<v-form
+		class="register-form"
     ref="form"
     v-model="valid"
     lazy-validation
@@ -45,7 +46,7 @@
 		<v-btn
       :disabled="!valid"
       color="#6C63FF"
-      class="mr-4"
+      class="mr-4 button"
       @click="validate"
     >
       Criar conta
@@ -94,5 +95,11 @@ export default {
 </script>
 
 <style lang='scss'>
-
+.register-form {
+  .button {
+    color: $button-text-secondary-color;
+    text-transform: none;
+    width: 100%;
+  }
+}
 </style>

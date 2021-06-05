@@ -33,7 +33,7 @@
 		>
 			<v-img
 				class="mt-6"
-				src="@/assets/images/welcome_cats.svg"
+				src="@/assets/images/login.svg"
 			/>
 		</v-col>
 	</v-row>
