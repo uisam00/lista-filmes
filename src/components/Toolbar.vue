@@ -10,7 +10,12 @@
 				color="black"
 			></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="title-toolbar">Filmes</v-toolbar-title>
+      <v-toolbar-title class="title-toolbar">
+
+				<v-btn color="#e451ff" text to="/" class="button">
+					Filmes
+				</v-btn>
+			</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -53,6 +58,11 @@
 <script>
 export default {
 	name: 'Toolbar',
+		methods: {
+		goTo(name) {
+			this.$router.push({ name: name })
+		}
+	}
 }
 </script>
 
