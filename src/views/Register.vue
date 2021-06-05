@@ -14,7 +14,14 @@
 				elevation="0"
 				class="pa-4"
 			>
-
+				<v-card-title
+					class="pa-0 mb-6 text-center"
+				>
+					Criar sua conta
+				</v-card-title>
+				<form-register
+					@register="createFirebaseUder"
+				/>
 			</v-card>
 
 		</v-col>
@@ -34,8 +41,17 @@
 </template>
 
 <script>
+import FormRegister from '@/components/FormRegister.vue';
 export default {
 	name: 'Register',
+	components: {
+		FormRegister,
+	},
+	methods: {
+		createFirebaseUder(user){
+			console.log(user);
+		}
+	}
 }
 </script>
 

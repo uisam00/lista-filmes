@@ -6,13 +6,13 @@
       dark
 			height="180"
     >
-      <v-app-bar-nav-icon
+      <!-- <v-app-bar-nav-icon
 				color="black"
-			></v-app-bar-nav-icon>
+			></v-app-bar-nav-icon> -->
 
       <v-toolbar-title class="title-toolbar">
 
-				<v-btn color="#e451ff" text to="/" class="button">
+				<v-btn color="#6C63FF" text to="/" class="button">
 					Filmes
 				</v-btn>
 			</v-toolbar-title>
