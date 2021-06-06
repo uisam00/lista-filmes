@@ -22,14 +22,14 @@
 				</v-card-title>
 
 				<form-register
-					@register="createFirebaseUder"
+					@register="createFirebaseUser"
 				/>
 				<line-or />
 				<v-row justify="center mt-10 mb-10">
           <v-col>
 						<outlined-button
 							text="Já possuo conta"
-							router="login"
+							route="login"
 						/>
 					</v-col>
           <v-col>
@@ -73,7 +73,7 @@ export default {
 		FormRegister,
 	},
 	methods: {
-		createFirebaseUder(user){
+		createFirebaseUser(user){
 			firebase
 				.auth()
 				.createUserWithEmailAndPassword(user.email, user.password)

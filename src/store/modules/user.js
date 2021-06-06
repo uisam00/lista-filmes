@@ -1,11 +1,11 @@
 const state = {
 	user: null,
-	hasSessions: false,
+	hasSession: false,
 }
 
 const getters = {
 	currentUser: () => (state.user),
-	hasSession: () => (state.hasSessions),
+	hasSession: () => (state.hasSession),
 }
 
 const actions = {

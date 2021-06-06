@@ -15,7 +15,7 @@
       >
         <v-card-title class="pa-0 card-title mb-14">Entrar</v-card-title>
         <form-login
-          @login="signInWithFirebase"
+          @login="loginWithFirebase"
         />
         <line-or />
         <v-row justify="center mt-10 mb-10">
@@ -66,40 +66,21 @@ export default {
   },
   methods: {
     ...mapActions(['addUser']),
-    signInWithFirebase(user) {
+    loginWithFirebase(user) {
       firebase
         .auth()
         .signInWithEmailAndPassword(user.email, user.password)
         .then(data => {
-          console.log(data)
-          this.redirectUser(data);
+          this.addUser({
+						name: data.user.displayName,
+						email: data.user.email
+					})
+          this.$router.push({ name: 'dashboard' });
         })
         .catch(err => {
           this.error = err.message;
-        });
+        })
     },
-    redirectUser(data) {
-      this.addUser({
-        name: data.user.displayName,
-        email: data.user.email
-      })
-      this.$router.push({ name: 'dashboard' });
-    },
-    loginWithFacebook() {
-      var provider = new firebase.auth.FacebookAuthProvider();
-
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-          console(result);
-          if (result.credential.accessToken) {
-            this.redirectUser(result);
-          }
-        }).catch((error) => {
-          console.log(error)
-        });
-    }
   },
 }
 </script>

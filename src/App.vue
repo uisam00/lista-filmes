@@ -30,7 +30,7 @@ export default {
 	watch: {
 		currentUser(currentUser) {
 			if(currentUser) {
-				this.$router.push('/dashboard')
+				this.$router.push('dashboard')
 			}
 		}
 	}
