@@ -54,7 +54,7 @@ import LineOr from '@/components/LineOr.vue'
 import OutlinedButton from '@/components/OutlinedButton.vue'
 import FilledButton from '@/components/FilledButton.vue'
 import FormLogin from '@/components/FormLogin.vue'
-import firebase from 'firebase';
+import * as fb from '@/plugins/firebase.js';
 
 export default {
   name: 'Login',
@@ -67,19 +67,24 @@ export default {
   methods: {
     ...mapActions(['addUser']),
     loginWithFirebase(user) {
-      firebase
-        .auth()
+
+      fb.auth
         .signInWithEmailAndPassword(user.email, user.password)
         .then(data => {
           this.addUser({
 						name: data.user.displayName,
+						dateBirth: user.dateBirth,
 						email: data.user.email
+
 					})
           this.$router.push({ name: 'dashboard' });
-        })
+					console.log(data.user.dateBirth)
+        },
+				)
         .catch(err => {
           this.error = err.message;
         })
+
     },
   },
 }

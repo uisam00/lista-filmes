@@ -62,8 +62,8 @@ import FormRegister from '@/components/FormRegister.vue';
 import OutlinedButton from '../components/OutlinedButton.vue'
 import FilledButton from '../components/FilledButton.vue'
 import LineOr from '../components/LineOr.vue'
+import * as fb from '@/plugins/firebase.js';
 
-import firebase from 'firebase';
 export default {
 	name: 'Register',
 	components: {
@@ -74,15 +74,18 @@ export default {
 	},
 	methods: {
 		createFirebaseUser(user){
-			firebase
-				.auth()
+			fb.auth
 				.createUserWithEmailAndPassword(user.email, user.password)
 				.then(data => {
 					data.user
 						.updateProfile({
 							displayName: user.name
+
 						})
 						.then(() => {
+							fb.usersCollection.doc(user.uid).setData({
+								'dateBirth' : user.dateBirth
+							})
 							this.$router.push({ name: 'login' })
 						});
 				})

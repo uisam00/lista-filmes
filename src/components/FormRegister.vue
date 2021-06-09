@@ -10,6 +10,35 @@
       label="Nome"
       required
     ></v-text-field>
+		<v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+					v-model="date"
+					:value="computedDateFormattedDatefns"
+					clearable-
+					label="Data de Nascimento"
+					readonly
+					v-bind="attrs"
+					v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+        v-model="date"
+				locale="br"
+        :active-picker.sync="activePicker"
+        :max="new Date().toISOString().substr(0, 10)"
+        min="1950-01-01"
+        @change="save"
+      ></v-date-picker>
+    </v-menu>
+
 
     <v-text-field
       v-model="email"
@@ -56,12 +85,17 @@
 </template>
 
 <script>
+import { format, parseISO } from 'date-fns'
+
 export default {
 	name: 'FormRegister',
 	data(){
 		return {
+			activePicker: null,
+      menu: false,
 			valid: true,
 			name: '',
+			date: '',
 			email: '',
 			password: '',
 			passwordConfirmation: '',
@@ -83,14 +117,29 @@ export default {
 			if(this.$refs.form.validate()){
 				const userRegister = {
 					name: this.name,
+					dateBirth: 'datateste',
 					email: this.email,
 					password: this.password,
 				}
 
 				this.$emit('register', userRegister);
 			}
-		}
-	}
+		},
+		save (date) {
+			this.$refs.menu.save(date)
+		},
+
+	},
+	computed: {
+      computedDateFormattedDatefns () {
+        return this.date ? format(parseISO(this.date), 'dd/MM/yyyy') : ''
+      },
+    },
+	watch: {
+		menu (val) {
+			val && setTimeout(() => (this.activePicker = 'YEAR'))
+		},
+	},
 }
 </script>
 
@@ -101,5 +150,6 @@ export default {
     text-transform: none;
     width: 100%;
   }
+
 }
 </style>

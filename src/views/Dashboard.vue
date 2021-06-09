@@ -1,6 +1,6 @@
 <template>
 	<div>
-		Olá, {{ userName }}
+		Olá, {{ [userName, dateBirth]  }}
 	</div>
 </template>
 
@@ -11,12 +11,14 @@ export default {
 	data() {
 		return {
 			userName: '',
+			dateBirth: '',
 		}
 	},
 	computed: {
 		...mapGetters(['currentUser'])
 	},
 	mounted() {
+		this.dateBirth = this.currentUser.dateBirth
 		this.userName = this.currentUser.name;
 	}
 }
