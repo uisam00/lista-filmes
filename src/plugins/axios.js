@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 const baseConfig = {
-	baseURL: 'http://jsonplaceholder.typicode.com',
-	headers: {
-		Authorization: 'Bearer {token}'
-	}
+	baseURL: `https://api.themoviedb.org/3/`,
+
 }
 
-export const axiosInstance = axios.create(baseConfig);
+export const http = axios.create(baseConfig);

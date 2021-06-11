@@ -1,6 +1,8 @@
 <template>
   <div class="search-holder">
-    <div class="search-bar">
+    <v-row>
+			<v-col>
+			<div class="search-bar">
 			<div class="form-holder">
 				<div class="navbarSearch">
 					<input
@@ -12,9 +14,13 @@
 						placeholder="Pesquisar"
 					/>
 				</div>
-				<v-icon class="icon">mdi-magnify</v-icon>
 			</div>
-		</div>
+			</div>
+			</v-col>
+			<v-col>
+				<v-icon class="icon" color="black">mdi-magnify</v-icon>
+			</v-col>
+		</v-row>
   </div>
 </template>
 <script>

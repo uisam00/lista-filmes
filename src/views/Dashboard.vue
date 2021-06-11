@@ -1,29 +1,29 @@
 <template>
 	<div>
-		Olá, {{ [userName, dateBirth]  }}
+		Olá, {{ [userName]  }}
 	</div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-export default {
-	name: 'Dashboard',
-	data() {
-		return {
-			userName: '',
-			dateBirth: '',
+	import { mapGetters } from 'vuex';
+	export default {
+		name: 'Dashboard',
+		data() {
+			return {
+				userName: '',
+			};
+		},
+		computed: {
+			...mapGetters(['currentUser']),
+		},
+		mounted() {
+			this.userName = this.currentUser.name;
+		},
+		methods: {
+
 		}
-	},
-	computed: {
-		...mapGetters(['currentUser'])
-	},
-	mounted() {
-		this.dateBirth = this.currentUser.dateBirth
-		this.userName = this.currentUser.name;
-	}
-}
+	};
 </script>
 
 <style lang="scss">
-
 </style>
